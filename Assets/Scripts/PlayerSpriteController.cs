@@ -7,7 +7,8 @@ public class PlayerSpriteController : MonoBehaviour
 {
     private SpriteRenderer playerSR;
     public Sprite[] animSprites;
-    private int animationTimer = 0;
+    private float animationTimer = 0;
+    private float animationSpeed = 1.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,13 +25,16 @@ public class PlayerSpriteController : MonoBehaviour
         //movement animation
         if (moving)
         {
-            animationTimer++;
+            animationTimer +=360 * animationSpeed * Time.deltaTime;
             if (animationTimer >= 360) animationTimer -= 360;
         }
         else {
-            animationTimer = Math.Max(0, animationTimer - 1);
-            if (animationTimer == 180) animationTimer = 0;
+            //smoothing animation
+            //TODO: force at least one final hop (or none)
+            animationTimer = Math.Min(animationTimer + 360 * animationSpeed * Time.deltaTime, animationTimer - animationTimer%180+179);
         }
+        //bouncing
         transform.rotation = Quaternion.AngleAxis(10 * (float)Math.Sin(animationTimer * Math.PI / 180), Vector3.forward);
+        transform.localPosition = new Vector2(0, 0.5f * (float) Math.Abs(Math.Sin(animationTimer*Math.PI/180)));
     }
 }

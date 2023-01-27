@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private PlayerSpriteController playerSprite;
+    private PlayerWeaponController playerWeapon;
     private Rigidbody2D playerRb;
     private float speed = 5f;
     public Sprite[] animSprites;
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody2D>();
         playerSprite = transform.GetChild(0).GetComponent<PlayerSpriteController>();
+        playerWeapon = transform.GetChild(0).transform.Find("PlayerWeaponController").GetComponent<PlayerWeaponController>();
     }
 
     // Update is called once per frame
@@ -48,5 +50,7 @@ public class PlayerController : MonoBehaviour
 
         //calling sprite child
         playerSprite.UpdateAnimation(mouseAngle, moveDir.magnitude>0);
+        //calling weapon child
+        playerWeapon.UpdateAnimation(mouseAngle);
     }
 }
