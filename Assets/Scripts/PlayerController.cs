@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private PlayerWeaponController playerWeapon;
     private Rigidbody2D playerRb;
     private float speed = 5f;
-    public Sprite[] animSprites;
+    public GameObject projectile;
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
@@ -52,5 +52,12 @@ public class PlayerController : MonoBehaviour
         playerSprite.UpdateAnimation(mouseAngle, moveDir.magnitude>0);
         //calling weapon child
         playerWeapon.UpdateAnimation(mouseAngle);
+
+        /*
+         * attack control
+         */
+        if (Input.GetMouseButtonDown(0)) {
+            Instantiate(projectile, transform.position, projectile.transform.rotation);
+        }
     }
 }

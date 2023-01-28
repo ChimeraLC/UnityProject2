@@ -132,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 150106032}
-  - component: {fileID: 150106034}
   - component: {fileID: 150106035}
   - component: {fileID: 150106037}
   - component: {fileID: 150106036}
@@ -160,26 +159,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &150106034
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 150106030}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 98732f6efbfe3c344a38953ca2a54ccc, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &150106035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,16 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e806768c40a8a44aef24d32a4b3a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animSprites:
-  - {fileID: 569350973, guid: cbcbc5eb98bad2a469c4a6722c2e0e5d, type: 3}
-  - {fileID: 300939957, guid: cbcbc5eb98bad2a469c4a6722c2e0e5d, type: 3}
-  - {fileID: 1846327197, guid: cbcbc5eb98bad2a469c4a6722c2e0e5d, type: 3}
-  - {fileID: -489294624, guid: cbcbc5eb98bad2a469c4a6722c2e0e5d, type: 3}
-  - {fileID: -2028477546, guid: cbcbc5eb98bad2a469c4a6722c2e0e5d, type: 3}
-  - {fileID: 1921343247, guid: cbcbc5eb98bad2a469c4a6722c2e0e5d, type: 3}
-  - {fileID: 1910440068, guid: cbcbc5eb98bad2a469c4a6722c2e0e5d, type: 3}
-  - {fileID: -1677866941, guid: cbcbc5eb98bad2a469c4a6722c2e0e5d, type: 3}
-  - {fileID: 569350973, guid: cbcbc5eb98bad2a469c4a6722c2e0e5d, type: 3}
+  projectile: {fileID: 3333710284053698772, guid: be6bb623667382a4e98d31bf05883752, type: 3}
 --- !u!61 &150106036
 BoxCollider2D:
   m_ObjectHideFlags: 0
