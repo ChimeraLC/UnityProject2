@@ -16,12 +16,18 @@ public class PlayerProjectile1Controller : MonoBehaviour
         projectileRb = GetComponent<Rigidbody2D>();
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         projectileRb.AddForce((mousePosition - (Vector2)transform.position).normalized * initialSpeed, ForceMode2D.Impulse);
-        projectileBc.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("hello");
+        //colliding with walls
+        if (collision.gameObject.CompareTag("Wall")) Destroy(this.gameObject);
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3333710284053698775}
   - component: {fileID: 3333710284053698768}
   - component: {fileID: 3333710284053698769}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerProjectile1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4, y: 0.4}
   m_EdgeRadius: 0
 --- !u!1001 &4551622470695186556
 PrefabInstance:
@@ -172,6 +172,10 @@ PrefabInstance:
     - target: {fileID: 7342433373212319660, guid: cf0ae670e6c104949bfc5e64372a7252, type: 3}
       propertyPath: m_Name
       value: Particle System
+      objectReference: {fileID: 0}
+    - target: {fileID: 7342433373212319660, guid: cf0ae670e6c104949bfc5e64372a7252, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8637997083877129023, guid: cf0ae670e6c104949bfc5e64372a7252, type: 3}
       propertyPath: m_SortingLayer
