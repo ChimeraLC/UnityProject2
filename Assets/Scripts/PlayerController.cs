@@ -25,10 +25,6 @@ public class PlayerController : MonoBehaviour
          */
 
         //keyboard
-        int leftKey = Input.GetKey(KeyCode.A) ? 1 : 0;
-        int rightKey = Input.GetKey(KeyCode.D) ? 1 : 0;
-        int upKey = Input.GetKey(KeyCode.W) ? 1 : 0;
-        int downKey = Input.GetKey(KeyCode.S) ? 1 : 0;
 
         //mouse position
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -38,8 +34,10 @@ public class PlayerController : MonoBehaviour
          * movement control
          */
         Vector2 moveDir = Vector2.zero;
-        moveDir.x = rightKey - leftKey;
-        moveDir.y = upKey - downKey;
+        if (Input.GetKey(KeyCode.A)) moveDir.x -= 1;
+        if (Input.GetKey(KeyCode.D)) moveDir.x += 1;
+        if (Input.GetKey(KeyCode.W)) moveDir.y += 1;
+        if (Input.GetKey(KeyCode.S)) moveDir.y -= 1;
         //normalize and move
         moveDir.Normalize();
         playerRb.velocity = speed * moveDir;
@@ -58,6 +56,8 @@ public class PlayerController : MonoBehaviour
          */
         if (Input.GetMouseButtonDown(0)) {
             Instantiate(projectile, transform.position, projectile.transform.rotation);
+            //update position of weapon
+            playerWeapon.flipAngle();
         }
     }
 }

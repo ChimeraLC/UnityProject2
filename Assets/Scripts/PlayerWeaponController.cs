@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerWeaponController : MonoBehaviour
 {
+    private float extraAngle = 50;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,10 @@ public class PlayerWeaponController : MonoBehaviour
 
     public void UpdateAnimation(float mouseAngle) {
 
-        transform.rotation = Quaternion.Euler(Vector3.forward * -mouseAngle);
+        transform.rotation = Quaternion.Euler(Vector3.forward * (-mouseAngle + 45 + extraAngle));
+    }
+
+    public void flipAngle() {
+        extraAngle *= -1;
     }
 }
