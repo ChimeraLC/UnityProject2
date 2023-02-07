@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 85508329}
   - component: {fileID: 85508328}
   - component: {fileID: 85508330}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemySlime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 128483749}
   - component: {fileID: 128483750}
   - component: {fileID: 128483751}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemySlimeEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
