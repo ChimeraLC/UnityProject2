@@ -17,7 +17,8 @@ public class SlimeEyeController : MonoBehaviour
 
     public void Look(Vector2 playerDirection)
     {
-        transform.localPosition = new Vector2(playerDirection.x * 0.25f, playerDirection.y * 0.1f - 0.225f);
+        transform.localPosition = Vector2.Lerp(transform.localPosition, 
+            new Vector2(playerDirection.x * 0.25f, playerDirection.y * 0.1f - 0.225f), 0.05f);
 
     }
 }

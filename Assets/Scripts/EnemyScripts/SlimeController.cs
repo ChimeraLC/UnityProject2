@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SlimeController : MonoBehaviour
+public class SlimeController : EnemyParent
 {
     // Start is called before the first frame update
     private GameObject player;
@@ -19,6 +19,7 @@ public class SlimeController : MonoBehaviour
         enemyRb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
         eye = transform.GetChild(0).GetComponent<SlimeEyeController>();
+        enemyDamage = 2;
     }
 
     // Update is called once per frame
