@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRb;
     private float speed = 5f;
     public GameObject projectile;
+    private int state = 0;
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
@@ -19,45 +20,80 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-        /*
-         * inputs
+    {
+        /*state control:
+         * 0 - free
+         * 1 - hurt
+         * 
          */
 
-        //keyboard
 
-        //mouse position
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        float mouseAngle = Mathf.Atan2(mousePosition.x-transform.position.x, mousePosition.y-transform.position.y) * Mathf.Rad2Deg;
+        if (state == 0)
+        {
+            /*
+             * inputs
+             */
 
-        /*
-         * movement control
-         */
-        Vector2 moveDir = Vector2.zero;
-        if (Input.GetKey(KeyCode.A)) moveDir.x -= 1;
-        if (Input.GetKey(KeyCode.D)) moveDir.x += 1;
-        if (Input.GetKey(KeyCode.W)) moveDir.y += 1;
-        if (Input.GetKey(KeyCode.S)) moveDir.y -= 1;
-        //normalize and move
-        moveDir.Normalize();
-        playerRb.velocity = speed * moveDir;
+            //keyboard
 
-        /*
-         * animation control
-         */
+            //mouse position
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float mouseAngle = Mathf.Atan2(mousePosition.x - transform.position.x, 
+                mousePosition.y - transform.position.y) * Mathf.Rad2Deg;
+            
+            /*
+             * movement control
+             */
+            Vector2 moveDir = Vector2.zero;
+            if (Input.GetKey(KeyCode.A)) moveDir.x -= 1;
+            if (Input.GetKey(KeyCode.D)) moveDir.x += 1;
+            if (Input.GetKey(KeyCode.W)) moveDir.y += 1;
+            if (Input.GetKey(KeyCode.S)) moveDir.y -= 1;
 
-        //calling sprite child
-        playerSprite.UpdateAnimation(mouseAngle, moveDir.magnitude>0);
-        //calling weapon child
-        playerWeapon.UpdateAnimation(mouseAngle);
+            //normalize and move
+            moveDir.Normalize();
+            playerRb.velocity = speed * moveDir;
 
-        /*
-         * attack control
-         */
-        if (Input.GetMouseButtonDown(0)) {
-            Instantiate(projectile, transform.position, projectile.transform.rotation);
-            //update position of weapon
-            playerWeapon.flipAngle();
+            /*
+             * animation control
+             */
+
+            //calling sprite child
+            playerSprite.UpdateAnimation(mouseAngle, moveDir.magnitude > 0);
+            //calling weapon child
+            playerWeapon.UpdateAnimation(mouseAngle);
+
+            /*
+             * attack control
+             */
+            if (Input.GetMouseButtonDown(0))
+            {
+                Instantiate(projectile, transform.position, projectile.transform.rotation);
+                //update position of weapon
+                playerWeapon.flipAngle();
+            }
+        }
+    }
+    //timer for hurt state
+    public IEnumerator HurtTimer(float t)
+    {
+        yield return new WaitForSeconds(t);
+        state = 0;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //collision with enemy
+        if (collision.gameObject.CompareTag("Enemy")) {
+            //grabbing stats of enemy
+            EnemyParent enemyStats = collision.gameObject.GetComponent<EnemyParent>();
+            Debug.Log(enemyStats.getDamage());
+            state = 1;
+            //knockback
+            playerRb.velocity = (transform.position - collision.gameObject.transform.position)
+                .normalized * enemyStats.getKnock();
+            //hurtstate (TODO: implement different timers)
+            StartCoroutine(HurtTimer(0.25f));
         }
     }
 }
