@@ -7,7 +7,7 @@ public abstract class PlayerProjectileInterface : MonoBehaviour
     protected Rigidbody2D projectileRb;
     protected BoxCollider2D projectileBc;
     protected Vector2 mousePosition;
-    protected float initialSpeed = 5.0f;
+    protected float initialSpeed = 7.5f;
     protected Vector2 direction;
     // Start is called before the first frame update
     void Start()
@@ -35,10 +35,10 @@ public abstract class PlayerProjectileInterface : MonoBehaviour
     {
         
     }
-    protected void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         //colliding with walls
-        if (collision.gameObject.CompareTag("Wall")) Destroy(this.gameObject);
+        if (collision.gameObject.CompareTag("VWall") || collision.gameObject.CompareTag("HWall")) Destroy(this.gameObject);
     }
 
     private void FixedUpdate()

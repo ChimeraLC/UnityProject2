@@ -47,12 +47,12 @@ public class SlimeController : EnemyParent
         //collision with player projectile
         if (collision.gameObject.CompareTag("PlayerProjectile"))
         {
-            enemyRb.velocity = collision.gameObject.GetComponent<PlayerProjectile1Controller>().getDirection();
+            enemyRb.velocity = collision.gameObject.GetComponent<PlayerProjectileInterface>().getDirection();
             Destroy(collision.gameObject);
             enemyAnim.SetInteger("state", 1);
             state = 1;
             //return to chase state after a certain time
-            StartCoroutine(HurtTimer(1f));
+            StartCoroutine(HurtTimer(0.75f));
         }
     }
 

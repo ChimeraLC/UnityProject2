@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private float speed = 5f;
     public GameObject projectile;
     private int state = 0;
+    private bool canFire = true;
+    private float weaponCooldown = 1f;
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
@@ -66,11 +68,13 @@ public class PlayerController : MonoBehaviour
             /*
              * attack control
              */
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0) && canFire)
             {
+                canFire = false;
                 Instantiate(projectile, transform.position, projectile.transform.rotation);
                 //update position of weapon
                 playerWeapon.flipAngle();
+                StartCoroutine(ProjectileTimer(weaponCooldown));
             }
         }
     }
@@ -79,6 +83,13 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(t);
         state = 0;
+    }
+
+    //timer for projectile fire
+    public IEnumerator ProjectileTimer(float t)
+    {
+        yield return new WaitForSeconds(t);
+        canFire = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
