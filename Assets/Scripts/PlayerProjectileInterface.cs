@@ -38,7 +38,10 @@ public abstract class PlayerProjectileInterface : MonoBehaviour
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         //colliding with walls
-        if (collision.gameObject.CompareTag("VWall") || collision.gameObject.CompareTag("HWall")) Destroy(this.gameObject);
+        if (collision.gameObject.CompareTag("VWall") || collision.gameObject.CompareTag("HWall")
+            || collision.gameObject.CompareTag("EnemyShield")) Destroy(this.gameObject);
+
+
     }
 
     private void FixedUpdate()

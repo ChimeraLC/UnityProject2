@@ -6,14 +6,14 @@ using UnityEngine;
 public class SlimeController : EnemyParent
 {
     // Start is called before the first frame update
-    private GameObject player;
-    private Vector2 playerDirection;
-    private Rigidbody2D enemyRb;
-    private SlimeEyeController eye;
-    private Animator enemyAnim;
-    private int enemyHp;
-    private int state;
-    void Start()
+    protected GameObject player;
+    protected Vector2 playerDirection;
+    protected Rigidbody2D enemyRb;
+    protected SlimeEyeController eye;
+    protected Animator enemyAnim;
+    protected int enemyHp;
+    protected int state;
+    protected virtual void Start()
     {
         enemyAnim = GetComponent<Animator>();
         enemyRb = GetComponent<Rigidbody2D>();
@@ -23,7 +23,7 @@ public class SlimeController : EnemyParent
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         //find player location
         playerDirection = (player.transform.position - transform.position).normalized;
@@ -35,14 +35,15 @@ public class SlimeController : EnemyParent
         if (state == 0)
         {
             //move towards player
-            enemyRb.velocity = playerDirection;
+            //enemyRb.velocity = playerDirection;
+            enemyRb.velocity = new Vector2();
 
             //update eye position
             eye.Look(playerDirection);
         }
     }
     //collision detection
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         //collision with player projectile
         if (collision.gameObject.CompareTag("PlayerProjectile"))
@@ -56,7 +57,7 @@ public class SlimeController : EnemyParent
         }
     }
 
-    public IEnumerator HurtTimer(float t)
+    protected IEnumerator HurtTimer(float t)
     {
         yield return new WaitForSeconds(t);
         state = 0;

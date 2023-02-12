@@ -19,5 +19,4 @@ public class PlayerProjectile1Controller : PlayerProjectileInterface
 
     }
 
-
 }
