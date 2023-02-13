@@ -35,8 +35,7 @@ public class SlimeController : EnemyParent
         if (state == 0)
         {
             //move towards player
-            //enemyRb.velocity = playerDirection;
-            enemyRb.velocity = new Vector2();
+            enemyRb.velocity = playerDirection;
 
             //update eye position
             eye.Look(playerDirection);
