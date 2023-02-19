@@ -23,11 +23,12 @@ public class PlayerProjectile3Controller : PlayerProjectileInterface
         if (Input.GetMouseButton(1))
         {
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
+            
             //finding perpendicular velocity
             //TODO: CASE WHERE MOUSE DOENS"T MOVE
             positionDiff = new Vector2(transform.position.x - mousePosition.x,
-                transform.position.y - mousePosition.y).normalized;
+                transform.position.y - mousePosition.y);
+            /*
             potentialDirection = direction
                 - Vector2.Dot(positionDiff, direction) *positionDiff;
 
@@ -36,6 +37,9 @@ public class PlayerProjectile3Controller : PlayerProjectileInterface
 
             //change direction
             projectileRb.velocity = potentialDirection * initialSpeed;
+            */
+
+            projectileRb.velocity += -5f*Time.deltaTime * positionDiff.normalized * positionDiff.magnitude;
             
         }
     }
