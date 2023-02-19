@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
     private PlayerWeaponController playerWeapon;
     private Rigidbody2D playerRb;
     private float speed = 5f;
-    public GameObject projectile;
+    public GameObject[] projectiles;
+    private float projectileIndex = 0f;
     private int state = 0;
     private bool canFire = true;
     private float weaponCooldown = 1f;
@@ -71,13 +72,26 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButton(0) && canFire)
             {
                 canFire = false;
-                Instantiate(projectile, transform.position, projectile.transform.rotation);
+                Instantiate(GetProjectile(), transform.position, GetProjectile().transform.rotation);
                 //update position of weapon
                 playerWeapon.flipAngle();
                 StartCoroutine(ProjectileTimer(weaponCooldown));
             }
         }
+
+        //swapping chosen projectile
+        //TODO: clean this up
+        projectileIndex += Input.mouseScrollDelta.y;
+        if (projectileIndex >= projectiles.Length) projectileIndex -= projectiles.Length;
+        if (projectileIndex < 0) projectileIndex += projectiles.Length;
+        Debug.Log(projectileIndex);
     }
+    //Getting currently selected projectile
+    private GameObject GetProjectile() {
+        return projectiles[(int)projectileIndex];
+    }
+
+
     //timer for hurt state
     public IEnumerator HurtTimer(float t)
     {
