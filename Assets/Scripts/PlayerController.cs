@@ -84,7 +84,6 @@ public class PlayerController : MonoBehaviour
         projectileIndex += Input.mouseScrollDelta.y;
         if (projectileIndex >= projectiles.Length) projectileIndex -= projectiles.Length;
         if (projectileIndex < 0) projectileIndex += projectiles.Length;
-        Debug.Log(projectileIndex);
     }
     //Getting currently selected projectile
     private GameObject GetProjectile() {
@@ -117,6 +116,8 @@ public class PlayerController : MonoBehaviour
             //knockback
             playerRb.velocity = (transform.position - collision.gameObject.transform.position)
                 .normalized * enemyStats.getKnock();
+            //invulnerability
+            //gameObject.layer = LayerMask.NameToLayer("PlayerHurt");
             //hurtstate (TODO: implement different timers)
             StartCoroutine(HurtTimer(0.25f));
         }

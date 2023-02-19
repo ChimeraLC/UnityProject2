@@ -50,6 +50,7 @@ public class PlayerProjectile2Controller : PlayerProjectileInterface
                 projectileRb.velocity = new Vector2(Mathf.Cos(newAngle), Mathf.Sin(newAngle)) * initialSpeed;
             }
         }
+
     }
     //provides the angle corresponding to a direction
     private float angleGen(Vector2 direction) { 
