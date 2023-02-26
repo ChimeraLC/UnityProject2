@@ -84,6 +84,11 @@ public class PlayerController : MonoBehaviour
         projectileIndex += Input.mouseScrollDelta.y;
         if (projectileIndex >= projectiles.Length) projectileIndex -= projectiles.Length;
         if (projectileIndex < 0) projectileIndex += projectiles.Length;
+
+        //Debug message
+        if (Input.mouseScrollDelta.y != 0) {
+            Debug.Log(projectileIndex);
+        }
     }
     //Getting currently selected projectile
     private GameObject GetProjectile() {
@@ -96,6 +101,22 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(t);
         state = 0;
+    }
+
+    //timer for invul state
+    public IEnumerator InvulTimer(float t)
+    {
+        //flashing effect
+        for (int i = 0; i < t / 0.2f; i++)
+        {
+            playerSprite.SetAlpha(255);
+            yield return new WaitForSeconds(0.1f);
+            playerSprite.SetAlpha(0);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        playerSprite.SetAlpha(255);
+        gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
     //timer for projectile fire
@@ -117,8 +138,9 @@ public class PlayerController : MonoBehaviour
             playerRb.velocity = (transform.position - collision.gameObject.transform.position)
                 .normalized * enemyStats.getKnock();
             //invulnerability
-            //gameObject.layer = LayerMask.NameToLayer("PlayerHurt");
+            gameObject.layer = LayerMask.NameToLayer("PlayerHurt");
             //hurtstate (TODO: implement different timers)
+            StartCoroutine(InvulTimer(1f));
             StartCoroutine(HurtTimer(0.25f));
         }
     }

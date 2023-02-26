@@ -37,4 +37,11 @@ public class PlayerSpriteController : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(10 * (float)Math.Sin(animationTimer * Math.PI / 180), Vector3.forward);
         transform.localPosition = new Vector2(0, 0.5f * (float) Math.Abs(Math.Sin(animationTimer*Math.PI/180)));
     }
+
+    // Update alpha of sprite
+    public void SetAlpha(int alphaValue) {
+        Color temp = playerSR.color;
+        temp.a = alphaValue;
+        playerSR.color = temp;
+    }
 }
